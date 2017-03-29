@@ -1,5 +1,11 @@
 import praw
 import csv
+import argparse
+import time
+
+parser = argparse.ArgumentParser()
+parser.add_argument("sub")
+args = parser.parse_args()
 
 reddit = praw.Reddit(client_id='HDUejy8lyaO-uw',
                      client_secret='dkQB2xSpT9GpqWwZcePnynZVd6g',
@@ -15,10 +21,11 @@ with open("constituents.csv","rb") as f:
 
 go_list = set(go_list)
 
-for submission in reddit.subreddit('news').top(limit=999999):
+for submission in reddit.subreddit(args.sub).top(limit=999999):
     text = submission.title + ' ' + submission.selftext
     text = text.lower()
     for check in [(go_word in text, go_word) for go_word in go_list]:
         if check[0]:
-            print check[1], submission.shortlink
+            created = time.strftime("%Y-%m-%d", time.localtime(submission.created))
+            print check[1], submission.shortlink, created 
         
