@@ -2,9 +2,12 @@ import praw
 import csv
 import argparse
 import time
+from datetime import datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument("sub")
+parser.add_argument("start")
+parser.add_argument("end")
 args = parser.parse_args()
 
 reddit = praw.Reddit(client_id='HDUejy8lyaO-uw',
@@ -20,13 +23,16 @@ with open("constituents.csv","rb") as f:
         go_list[row[1].lower()]=row[0]
 
 
-for submission in reddit.subreddit(args.sub).top(limit=1000):
-    #if submission.score < 5000:
-    #    continue
+start = datetime.strptime(args.start, '%Y-%m-%d').total_seconds()
+end = datetime.strptime(args.end, '%Y-%m-%d').total_seconds()
+
+for submission in reddit.subreddit(args.sub).submissions(start, end):
+    if submission.score < 5000:
+        continue
     text = submission.title + ' ' + submission.selftext
     text = text.lower()
     for check in [(go_word in text, go_word) for go_word in go_list]:
         if check[0]:
             created = time.strftime("%Y-%m-%d", time.localtime(submission.created))
-            print go_list[check[1]], submission.shortlink, created 
+            print go_list[check[1]], submission.shortlink, created, submission.score
         
