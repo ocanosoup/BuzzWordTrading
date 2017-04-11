@@ -1,0 +1,8 @@
+When looking through for companies we also need to look for their abbreviations and shorthand, how people would refer to them in general
+
+
+
+For tweet analysis we can look at context free grammar and sentence parse trees to help determine whether the statement is being positive or negative towards a subject, depending on what noun phrase the adjective or PP is applied to
+We also need a good dataset of what determines a negative vs positive phrase, nots negate them and certain words such as legitimizing in couple with not "thanks for not legitimizing our hate in office, donald trump @CNN #notmypresident" can be seen as a positive or negative tweet. thanks is super positive but is not being directed at trump in this tweet, not legitimizing is in praise of CNN but can be seen negatively
+Looking for a dataset that typifies these phrases that reverse the sentiment or add complexity to it: "Thanks for not... "
+Parser for informal text, not strictly set for loarger and eloquent sentences
