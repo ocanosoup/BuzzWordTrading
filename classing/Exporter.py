@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys,getopt,got,datetime,codecs
+import csv
 
 def main(argv):
 
@@ -55,14 +56,18 @@ def main(argv):
 				tweetCriteria.maxTweets = int(arg)
 
 
-		outputFile = codecs.open("output_got.csv", "w+", "utf-8")
+		csvfile = codecs.open("output_got.csv", "w+", "utf-8")
 
-		outputFile.write('username;date;retweets;favorites;text;geo;mentions;hashtags;id;permalink')
+		fieldnames = ['username', 'date', 'retweets','favorites','text','geo','mentions','hashtags','id','permalink']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
 		print('Searching...\n')
 
 		def receiveBuffer(tweets):
 			for t in tweets:
+
+                                
+                                writer.writerow(data)
 				outputFile.write(('\n%s;%s;%d;%d;"%s";%s;%s;%s;"%s";%s' % (t.username, t.date.strftime("%Y-%m-%d %H:%M"), t.retweets, t.favorites, t.text, t.geo, t.mentions, t.hashtags, t.id, t.permalink)))
 			outputFile.flush();
 			print('More %d saved on file...\n' % len(tweets))
