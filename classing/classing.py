@@ -64,12 +64,13 @@ if __name__ == '__main__':
                     train_data.append(line[3])
                     train_labels.append(int(line[1]))
 
+        print "creating vectorizer"
         vectorizer = TfidfVectorizer(min_df=5,
                                  max_df = 0.8,
+                                 max_features = 70000, 
                                  sublinear_tf=True,
                                  use_idf=True)
 
-        print "creating vectorizer"
         train_vectors = vectorizer.fit_transform(train_data)
         test_vectors = vectorizer.transform(test_data)
         with open("pickles/train_vector.pkl","w") as f:
@@ -144,12 +145,21 @@ if __name__ == '__main__':
     unknown_liblinear = classifier_liblinear.predict(unknown_vectors)
     t3 = time.time()
 
+    print unknown_liblinear
+
+    buy = 0
+    sell = 0
+    for sentiment in unknown_liblinear:
+        if sentiment == 1:
+            buy += 1
+        if sentiment == 0:
+            sell += 1
+
+    print "Buy/Sell: {}/{}".format(buy,sell)
 
     time_liblinear_train = t1-t0
     time_liblinear_predict = t2-t1
     time_liblinear_guess = t3-t2
-
-
 
     '''
     # Print results in a nice table
@@ -165,5 +175,7 @@ if __name__ == '__main__':
     print len(prediction_liblinear),prediction_liblinear[:10]
 
     print("Results for LinearSVC()")
-    print("Training time: %fs; Prediction time: %fs" % (time_liblinear_train, time_liblinear_predict))
+    print("Training time: %fs; Prediction time(Test): %fs" % (time_liblinear_train, time_liblinear_predict))
     print(classification_report(test_labels, prediction_liblinear))
+
+    print "\nPrediction time(Unknowns): {}".format(time_liblinear_guess)
