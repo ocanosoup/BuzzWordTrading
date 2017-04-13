@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+import sys, traceback
 import sys,getopt,got,datetime,codecs
 import csv
 
@@ -31,9 +31,11 @@ def main(argv):
  python Exporter.py --username "barackobama" --maxtweets 10 --toptweets\n""")
 		return
 
-	try:
-		opts, args = getopt.getopt(argv, "", ("username=", "since=", "until=", "querysearch=", "toptweets", "maxtweets="))
+        opts, args = getopt.getopt(argv, "", ("username=", "since=", "until=", "querysearch=", "toptweets", "maxtweets="))
 
+        tweetCriteria = got.manager.TweetCriteria()
+
+	try:
 		tweetCriteria = got.manager.TweetCriteria()
 
 		for opt,arg in opts:
@@ -55,29 +57,40 @@ def main(argv):
 			elif opt == '--maxtweets':
 				tweetCriteria.maxTweets = int(arg)
 
+		with codecs.open("output_got.csv", "w+", "utf-8") as csvfile:
 
-		csvfile = codecs.open("output_got.csv", "w+", "utf-8")
+                        fieldnames = ['username', 'date', 'retweets','favorites','text','geo','mentions','hashtags','id','permalink']
+                        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-		fieldnames = ['username', 'date', 'retweets','favorites','text','geo','mentions','hashtags','id','permalink']
-                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                        print('Searching...\n')
 
-		print('Searching...\n')
+                        def receiveBuffer(tweets):
+                                for t in tweets:
+                                        try:
+                                                data = {'username':t.username, 
+                                                'date':t.date.strftime("%Y-%m-%d %H:%M"), 
+                                                'retweets':t.retweets,
+                                                'favorites':t.favorites,
+                                                'text':t.text.encode("ascii", "ignore"),
+                                                'geo':t.geo,
+                                                'mentions':t.mentions,
+                                                'hashtags':t.hashtags,
+                                                'id':t.id,
+                                                'permalink':t.permalink
+                                                }
+                                        
+                                                writer.writerow(data)
+                                        except UnicodeEncodeError as e:
+                                            print e
+                                csvfile.flush();
+                                print('%d more saved to file...\n' % len(tweets))
 
-		def receiveBuffer(tweets):
-			for t in tweets:
+                        got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
 
-                                
-                                writer.writerow(data)
-				outputFile.write(('\n%s;%s;%d;%d;"%s";%s;%s;%s;"%s";%s' % (t.username, t.date.strftime("%Y-%m-%d %H:%M"), t.retweets, t.favorites, t.text, t.geo, t.mentions, t.hashtags, t.id, t.permalink)))
-			outputFile.flush();
-			print('More %d saved on file...\n' % len(tweets))
-
-		got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
-
-	except arg:
-		print('Arguments parser error, try -h' + arg)
+	except Exception as e:
+		print 'Arguments parser error, try -h', e
+                traceback.print_exc(file=sys.stdout)
 	finally:
-		outputFile.close()
 		print('Done. Output file generated "output_got.csv".')
 
 if __name__ == '__main__':

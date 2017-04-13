@@ -22,6 +22,9 @@ if __name__ == '__main__':
         usage()
         sys.exit(1)
 
+    # Create feature vectors
+    vectorizer = None 
+
     # Read the data
     train_data = []
     train_labels = []
@@ -33,7 +36,7 @@ if __name__ == '__main__':
     try:
         with open("pickles/train_vector.pkl","r") as f:
             print "loading vectorizer"
-            train_vectors, test_vectors, train_labels, test_labels = pickle.load(f)
+            train_vectors, test_vectors, train_labels, test_labels, vectorizer = pickle.load(f)
 
     except Exception as e:
         data_dir = sys.argv[1]
@@ -61,19 +64,16 @@ if __name__ == '__main__':
                     train_data.append(line[3])
                     train_labels.append(int(line[1]))
 
-
+        vectorizer = TfidfVectorizer(min_df=5,
+                                 max_df = 0.8,
+                                 sublinear_tf=True,
+                                 use_idf=True)
 
         print "creating vectorizer"
-        # Create feature vectors
-        vectorizer = TfidfVectorizer(min_df=5,
-                                     max_df = 0.8,
-                                     sublinear_tf=True,
-                                     use_idf=True)
-
         train_vectors = vectorizer.fit_transform(train_data)
         test_vectors = vectorizer.transform(test_data)
         with open("pickles/train_vector.pkl","w") as f:
-            pickle.dump((train_vectors, test_vectors, train_labels, test_labels ),f)
+            pickle.dump((train_vectors, test_vectors, train_labels, test_labels, vectorizer ),f)
 
 
     '''
@@ -127,11 +127,21 @@ if __name__ == '__main__':
     prediction_liblinear = classifier_liblinear.predict(test_vectors)
     t2 = time.time()
 
+    unknown_data = []
     print "vectorizing input tweets..."
-    
+    with open('output_got.csv','r') as csvfile:
+        csvreader = csv.reader(csvfile)
+
+        head = next(csvreader, None)
+        for line in csvreader:
+            if len(line) == 0:
+                continue
+            unknown_data.append(line[4])
+ 
+    unknown_vectors = vectorizer.transform(unknown_data)
 
     print "predicting input tweets..."
-    unknown_liblinear = classifier_liblinear.predict(test_vectors)
+    unknown_liblinear = classifier_liblinear.predict(unknown_vectors)
     t3 = time.time()
 
 
