@@ -23,7 +23,17 @@ def stockDrop(ticker, date1):
         if float(nextLower) < float(originalStock):
             days = len(dataList) - index
             break
+    print days, originalStock, nextLower
     return days, originalStock, nextLower
 
-#stockDrop("BP", '2016-03-29')
-#getYahooStock("WFC", '2016-03-29', '2017-03-29')
+#def stockRange(ticker, date, range):
+    #    dateRange = datetime.datetime()
+
+def buyStock(ticker, buyDate, sellDate, amount):
+    data = getYahooStock(ticker, buyDate, sellDate)
+    print (amount * data[2])/data[1]
+    return (amount * data[2])/data[1]
+
+stockDrop("BP", '2016-03-29')
+getYahooStock("WFC", '2016-03-29', '2017-03-29')
+buyStock("WFC", '2016-03-29', '2017-03-29', 1)
