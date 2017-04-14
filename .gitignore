@@ -2,3 +2,5 @@ classing/pickles/
 classing/output/
 *.csv
 *.pyc
+*.pkl
+*.swp

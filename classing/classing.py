@@ -266,7 +266,7 @@ if __name__ == '__main__':
     fig, ax = plt.subplots()
 
     index = np.arange(n_groups)
-    bar_width = 0.5
+    bar_width = 0.35
 
     opacity = 0.4
 
