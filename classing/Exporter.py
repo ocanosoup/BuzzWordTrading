@@ -65,6 +65,7 @@ def main(argv):
                         print('Searching...\n')
 
                         def receiveBuffer(tweets):
+
                                 for t in tweets:
                                         try:
                                                 data = {'username':t.username, 
@@ -78,12 +79,11 @@ def main(argv):
                                                 'id':t.id,
                                                 'permalink':t.permalink
                                                 }
-                                        
                                                 writer.writerow(data)
                                         except UnicodeEncodeError as e:
                                             print e
                                 csvfile.flush();
-                                print('%d more saved to file...\n' % len(tweets))
+                                print('%s - saved to file...\n' % tweets[0].date.strftime("%Y-%m-%d %H:%M"))
 
                         got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
 

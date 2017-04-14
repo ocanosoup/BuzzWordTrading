@@ -151,17 +151,21 @@ if __name__ == '__main__':
     print "getting tweets..."
     with open(filename, 'w') as csvfile:
 
+        counter = 0
         fieldnames = ['neg', 'pos']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
-        tweetCriteria = got.manager.TweetCriteria()
+        tweetCriteria = got.manager.TweetCriteria().setMaxTweets(100000000)
 
         tweetCriteria.querySearch = args.querysearch
         tweetCriteria.since = args.since
         tweetCriteria.until = args.until
+        tweetCriteria.until = args.until
 
         def receiveBuffer(tweets):
+            global counter
+            counter += len(tweets)
             unknown_data = []
             unknown_dates = []
             for t in tweets:
@@ -190,6 +194,7 @@ if __name__ == '__main__':
                 #writer.writerow(data)
 
         got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
+        print counter
 
 
     ''' ********************* Plot Twitter Data **********************
