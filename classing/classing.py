@@ -7,23 +7,31 @@ import time
 
 import csv
 import pickle
+import getopt,got,datetime,codecs
+import argparse
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import svm
 from sklearn.metrics import classification_report
 
-def usage():
-    print("Usage:")
-    print("python %s <data_dir>" % sys.argv[0])
-
 if __name__ == '__main__':
 
-    if len(sys.argv) < 2:
-        usage()
-        sys.exit(1)
+    parser = argparse.ArgumentParser(description='Get tweet sentiment for a query over a period of time')
+
+    parser.add_argument('--since', dest='since', type=str, required=True)
+    parser.add_argument('--until', dest='until', type=str, required=True)
+    parser.add_argument('--querysearch', dest='querysearch', type=str, required=True)
+
+    args = parser.parse_args()
+
+    filename='output/output'
+    for arg in args.__dict__:
+        filename += '_' + args.__dict__[arg].replace(' ','')
+
+    filename+='.csv'
 
     # Create feature vectors
-    vectorizer = None 
+    vectorizer = None
 
     # Read the data
     train_data = []
@@ -88,7 +96,7 @@ if __name__ == '__main__':
     t2 = time.time()
     time_rbf_train = t1-t0
     time_rbf_predict = t2-t1
- 
+
     print "creating SVC classifier"
     # Perform classification with SVM, kernel=linear
     classifier_linear = svm.SVC(kernel='linear')
@@ -102,7 +110,7 @@ if __name__ == '__main__':
     '''
 
     #with open('pickles/classifier.pkl','r') as f:
-        
+
     t0 = time.time()
     classifier_liblinear = None
     try:
@@ -122,30 +130,62 @@ if __name__ == '__main__':
     if classifier_liblinear == None:
         raise Exception("Bad PKL file...")
 
-    
-
     t1 = time.time()
     prediction_liblinear = classifier_liblinear.predict(test_vectors)
     t2 = time.time()
 
-    unknown_data = []
-    print "vectorizing input tweets..."
-    with open('output_got.csv','r') as csvfile:
-        csvreader = csv.reader(csvfile)
+    ''' ********************* Get New Tweets ************************
+        This is the section where we get the tweets and build the Vector
+        for the input data and write to a CSV for further study.
+        The CSV format should be:
+            Score, Time
+        And the file should be named after the tweet querysearch
+        ************************************************************** '''
 
-        head = next(csvreader, None)
-        for line in csvreader:
-            if len(line) == 0:
-                continue
-            unknown_data.append(line[4])
- 
-    unknown_vectors = vectorizer.transform(unknown_data)
 
-    print "predicting input tweets..."
-    unknown_liblinear = classifier_liblinear.predict(unknown_vectors)
-    t3 = time.time()
+    print "getting tweets..."
+    with open(filename, 'w') as csvfile:
 
-    print unknown_liblinear
+        fieldnames = ['sentiment', 'time']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+
+        tweetCriteria = got.manager.TweetCriteria()
+
+        tweetCriteria.querySearch = args.querysearch
+        tweetCriteria.since = args.since
+        tweetCriteria.until = args.until
+
+        def receiveBuffer(tweets):
+            print('predicting %d more tweets...' % len(tweets))
+            unknown_data = []
+            unknown_dates = []
+            for t in tweets:
+                try:
+                    unknown_data.append(t.text.encode("ascii", "ignore"))
+                    unknown_dates.append(t.date.strftime("%Y-%m-%d %H:%M"))
+                except UnicodeEncodeError as e:
+                    print e
+
+            unknown_vectors = vectorizer.transform(unknown_data)
+            unknown_liblinear = classifier_liblinear.predict(unknown_vectors)
+
+            for i, sentiment in enumerate(unknown_liblinear):
+                writer.writerow({'sentiment': sentiment, 'time': unknown_dates[i]})
+
+        got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
+
+        '''
+        print "vectorizing input tweets..."
+        with open('output_got.csv','r') as csvfile:
+            csvreader = csv.reader(csvfile)
+
+            head = next(csvreader, None)
+            for line in csvreader:
+                if len(line) == 0:
+                    continue
+                unknown_data.append(line[4])
+        '''
 
     buy = 0
     sell = 0
