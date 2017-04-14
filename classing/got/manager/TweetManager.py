@@ -117,7 +117,6 @@ class TweetManager:
 			jsonResponse = response.read()
 		except:
 			print "Twitter weird response. Try to see on browser: https://twitter.com/search?q=%s&src=typd" % urllib.quote(urlGetData)
-			sys.exit()
 			return
 		
 		dataJson = json.loads(jsonResponse)

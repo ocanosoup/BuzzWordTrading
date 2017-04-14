@@ -9,10 +9,14 @@ import csv
 import pickle
 import getopt,got,datetime,codecs
 import argparse
+from collections import OrderedDict
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn import svm
 from sklearn.metrics import classification_report
+
+import numpy as np
+import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
 
@@ -142,11 +146,12 @@ if __name__ == '__main__':
         And the file should be named after the tweet querysearch
         ************************************************************** '''
 
+    hist = OrderedDict()
 
     print "getting tweets..."
     with open(filename, 'w') as csvfile:
 
-        fieldnames = ['sentiment', 'time']
+        fieldnames = ['neg', 'pos']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
 
@@ -157,36 +162,147 @@ if __name__ == '__main__':
         tweetCriteria.until = args.until
 
         def receiveBuffer(tweets):
-            print('predicting %d more tweets...' % len(tweets))
             unknown_data = []
             unknown_dates = []
             for t in tweets:
                 try:
+                    date = t.date.strftime("%Y-%m-%d %H")
                     unknown_data.append(t.text.encode("ascii", "ignore"))
-                    unknown_dates.append(t.date.strftime("%Y-%m-%d %H:%M"))
+                    unknown_dates.append(date)
+                    if not date in hist: hist[date] =  {'pos':0,'neg':0}
+
                 except UnicodeEncodeError as e:
                     print e
 
+            print('%s - predicting %d more tweets...' % (unknown_dates[0], len(tweets)))
             unknown_vectors = vectorizer.transform(unknown_data)
             unknown_liblinear = classifier_liblinear.predict(unknown_vectors)
 
             for i, sentiment in enumerate(unknown_liblinear):
-                writer.writerow({'sentiment': sentiment, 'time': unknown_dates[i]})
+                #data = {}
+                if sentiment == 0:
+                    hist[unknown_dates[i]]['neg'] += 1
+                    #data['neg'] = unknown_dates[i]
+                else:
+                    hist[unknown_dates[i]]['pos'] += 1
+                    #data['pos'] = unknown_dates[i]
+
+                #writer.writerow(data)
 
         got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
 
-        '''
-        print "vectorizing input tweets..."
-        with open('output_got.csv','r') as csvfile:
-            csvreader = csv.reader(csvfile)
 
-            head = next(csvreader, None)
-            for line in csvreader:
-                if len(line) == 0:
-                    continue
-                unknown_data.append(line[4])
-        '''
+    ''' ********************* Plot Twitter Data **********************
+        In this section we plot the Twitter sentiment data. We should
+        plot a plot with pos above neg, pos next to neg, the
+        difference in a gains/loss format. and potentially also plot
+        the stockmarket data
+        ************************************************************** '''
 
+    print hist
+
+    dates = []
+    neg = []
+    pos = []
+    diff = []
+    for date in reversed(hist):
+        dates.append(date)
+        neg.append(hist[date]['neg']*-1)
+        pos.append(hist[date]['pos'])
+        diff.append(neg[-1]+pos[-1])
+
+    n_groups = len(dates)
+
+    fig, ax = plt.subplots()
+
+    index = np.arange(n_groups)
+    bar_width = 0.5
+
+    opacity = 0.4
+
+    rects1 = plt.bar(index, pos, bar_width,
+                     alpha=opacity,
+                     color='b',
+                     label='Positive')
+
+    rects2 = plt.bar(index, neg, bar_width,
+                     alpha=opacity,
+                     color='r',
+                     label='Negative')
+
+    plt.xlabel('Datetime (Year-Month-Day hour)')
+    plt.ylabel('Number of Tweets')
+    plt.title('Histogram of Positive and Negative (Above and Below) Tweets Matching the Query "{}"'.format(args.querysearch))
+    plt.xticks(index + bar_width / 2, dates, rotation='vertical')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+
+    # New plot
+    fig, ax = plt.subplots()
+
+    index = np.arange(n_groups)
+    bar_width = 0.5
+
+    opacity = 0.4
+
+    rects1 = plt.bar(index, diff, bar_width,
+                     alpha=opacity,
+                     color='b',
+                     label='Difference')
+
+    plt.xlabel('Datetime (Year-Month-Day hour)')
+    plt.ylabel('Difference (Positives - Negatives)')
+    plt.title('Histogram of the Difference of Sentiments in Tweets Matching the Query "{}"'.format(args.querysearch))
+    plt.xticks(index + bar_width / 2, dates, rotation='vertical')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+    #new plot
+    fig, ax = plt.subplots()
+
+    index = np.arange(n_groups)
+    bar_width = 0.5
+
+    opacity = 0.4
+
+    rects1 = plt.bar(index, pos, bar_width,
+                     alpha=opacity,
+                     color='b',
+                     label='Positive')
+
+    def double(x): return x*-1
+    rects2 = plt.bar(index+bar_width, list(map(double, neg)), bar_width,
+                     alpha=opacity,
+                     color='r',
+                     label='Negative')
+
+    plt.xlabel('Datetime (Year-Month-Day hour)')
+    plt.ylabel('Number of Tweets')
+    plt.title('Histogram of Positive and Negative (Side-by-Side) Tweets Matching the Query "{}"'.format(args.querysearch))
+    plt.xticks(index + bar_width / 2, dates, rotation='vertical')
+    plt.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+    '''
+    print "vectorizing input tweets..."
+    with open('output_got.csv','r') as csvfile:
+        csvreader = csv.reader(csvfile)
+
+        head = next(csvreader, None)
+        for line in csvreader:
+            if len(line) == 0:
+                continue
+            unknown_data.append(line[4])
+    '''
+
+    '''
     buy = 0
     sell = 0
     for sentiment in unknown_liblinear:
@@ -196,10 +312,10 @@ if __name__ == '__main__':
             sell += 1
 
     print "Buy/Sell: {}/{}".format(buy,sell)
+    '''
 
     time_liblinear_train = t1-t0
     time_liblinear_predict = t2-t1
-    time_liblinear_guess = t3-t2
 
     '''
     # Print results in a nice table
@@ -218,4 +334,3 @@ if __name__ == '__main__':
     print("Training time: %fs; Prediction time(Test): %fs" % (time_liblinear_train, time_liblinear_predict))
     print(classification_report(test_labels, prediction_liblinear))
 
-    print "\nPrediction time(Unknowns): {}".format(time_liblinear_guess)
