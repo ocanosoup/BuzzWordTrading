@@ -1,0 +1,210 @@
+Script started on Mon 17 Apr 2017 10:25:22 AM DST
+]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ xeyescp output/* /mnt/c/Users/Johnny/Documents/BuzzTradingData/ ; wc -l /mnt/c/Users/Johnny/Documents/BuzzTradingData/* ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cxeyes[K[Kvim [K[K[K[Kcd hom[K[K[K[K ![K~
+]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ git clone [6Pcd ~git clone [K[K[K[K[K[K[K[K[K[Kcd ~[K
+]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ 
+]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ 
+]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ 
+]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ 
+]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ 
+]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ 
+]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ cd ~xeyescp output/* /mnt/c/Users/Johnny/Documents/BuzzTradingData/ ; wc -l /mnt/c/Users/Johnny/Documents/BuzzTradingData/* ;[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cxeyes[K[1Pcd ~[K[K]0;johnskan@DESKTOP-SVTCT79: ~johnskan@DESKTOP-SVTCT79:~$ cd BuzzWordTrading/classing/
+]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ pyt[K[K[Kreset
+[3g        H        H        H        H        H        H        H        H        H        H        H        H        H        Hc[!p[?3;4l[4l>]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ source ![K~/venv/bin/activate
+(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ source ~/venv/bin/acttivate[A(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ reset[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Ccd BuzzWordTrading/cllassing/[A(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ [C[C[C~[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cxeyes[1Pcd ~BuzzWordTrading/cllassing/[A(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ reset[K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Csource ~/venv/bin/acttivate[A(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ [K
+[K[A[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cpython[K[K[K[K[K[Kpyh[Kthon Cl[K[Kclassinm[Kg.py - -since 2017-04-07 --until 2017-04-08 --q[Kstring[K[K[K[K[K[Kquerysearch "United[K[K[K[K[K[Kunited Ai[K[Kairlines"
+loading vectorizer
+loading vectorizer
+getting tweets...
+2017-04-07 19 - predicting 100 more tweets...
+Prediction Time: 0.004506s
+2017-04-07 14 - predicting 100 more tweets...
+Prediction Time: 0.005001s
+2017-04-07 09 - predicting 100 more tweets...
+Prediction Time: 0.004506s
+2017-04-06 23 - predicting 69 more tweets...
+Prediction Time: 0.003496s
+369
+OrderedDict([('2017-04-07 19', {'neg': 14, 'pos': 7}), ('2017-04-07 18', {'neg': 10, 'pos': 5}), ('2017-04-07 17', {'neg': 7, 'pos': 15}), ('2017-04-07 16', {'neg': 9, 'pos': 4}), ('2017-04-07 15', {'neg': 5, 'pos': 9}), ('2017-04-07 14', {'neg': 10, 'pos': 7}), ('2017-04-07 13', {'neg': 17, 'pos': 15}), ('2017-04-07 12', {'neg': 7, 'pos': 6}), ('2017-04-07 11', {'neg': 9, 'pos': 6}), ('2017-04-07 10', {'neg': 3, 'pos': 14}), ('2017-04-07 09', {'neg': 11, 'pos': 12}), ('2017-04-07 08', {'neg': 7, 'pos': 7}), ('2017-04-07 07', {'neg': 9, 'pos': 3}), ('2017-04-07 06', {'neg': 1, 'pos': 8}), ('2017-04-07 05', {'neg': 4, 'pos': 1}), ('2017-04-07 04', {'neg': 2, 'pos': 4}), ('2017-04-07 03', {'neg': 2, 'pos': 4}), ('2017-04-07 02', {'neg': 6, 'pos': 2}), ('2017-04-07 01', {'neg': 3, 'pos': 8}), ('2017-04-07 00', {'neg': 8, 'pos': 11}), ('2017-04-06 23', {'neg': 7, 'pos': 6}), ('2017-04-06 22', {'neg': 11, 'pos': 14}), ('2017-04-06 21', {'neg': 10, 'pos': 15}), ('2017-04-06 20', {'neg': 11, 'pos': 3})])
+157390 [0, 1, 0, 1, 0, 0, 0, 1, 0, 0]
+157390 [0 0 0 0 0 1 0 0 1 0]
+Results for LinearSVC()
+Training time: 0.019003s; Prediction time(Test): 0.011501s
+             precision    recall  f1-score   support
+
+          0       0.80      0.79      0.79     78255
+          1       0.79      0.81      0.80     79135
+
+avg / total       0.80      0.80      0.80    157390
+
+(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ python classing.py --since 2017-04-07 --until 2017-04-08 --querysearch "united airlines"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ [K(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ reset
+[3g        H        H        H        H        H        H        H        H        H        H        H        H        H        Hc[!p[?3;4l[4l>(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ resetpython classing.py ---since 2017-04-07 --until 2017-04-08 --querysearch "united airlines"
+loading vectorizer
+loading vectorizer
+getting tweets...
+2017-04-07 19 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-07 14 - predicting 100 more tweets...
+Prediction Time: 0.005501s
+2017-04-07 09 - predicting 100 more tweets...
+Prediction Time: 0.004496s
+2017-04-06 23 - predicting 69 more tweets...
+Prediction Time: 0.003001s
+369
+OrderedDict([('2017-04-07 19', {'neg': 14, 'pos': 7}), ('2017-04-07 18', {'neg': 10, 'pos': 5}), ('2017-04-07 17', {'neg': 7, 'pos': 15}), ('2017-04-07 16', {'neg': 9, 'pos': 4}), ('2017-04-07 15', {'neg': 5, 'pos': 9}), ('2017-04-07 14', {'neg': 10, 'pos': 7}), ('2017-04-07 13', {'neg': 17, 'pos': 15}), ('2017-04-07 12', {'neg': 7, 'pos': 6}), ('2017-04-07 11', {'neg': 9, 'pos': 6}), ('2017-04-07 10', {'neg': 3, 'pos': 14}), ('2017-04-07 09', {'neg': 11, 'pos': 12}), ('2017-04-07 08', {'neg': 7, 'pos': 7}), ('2017-04-07 07', {'neg': 9, 'pos': 3}), ('2017-04-07 06', {'neg': 1, 'pos': 8}), ('2017-04-07 05', {'neg': 4, 'pos': 1}), ('2017-04-07 04', {'neg': 2, 'pos': 4}), ('2017-04-07 03', {'neg': 2, 'pos': 4}), ('2017-04-07 02', {'neg': 6, 'pos': 2}), ('2017-04-07 01', {'neg': 3, 'pos': 8}), ('2017-04-07 00', {'neg': 8, 'pos': 11}), ('2017-04-06 23', {'neg': 7, 'pos': 6}), ('2017-04-06 22', {'neg': 11, 'pos': 14}), ('2017-04-06 21', {'neg': 10, 'pos': 15}), ('2017-04-06 20', {'neg': 11, 'pos': 3})])
+157390 [0, 1, 0, 1, 0, 0, 0, 1, 0, 0]
+157390 [0 0 0 0 0 1 0 0 1 0]
+Results for LinearSVC()
+Training time: 0.017502s; Prediction time(Test): 0.012003s
+             precision    recall  f1-score   support
+
+          0       0.80      0.79      0.79     78255
+          1       0.79      0.81      0.80     79135
+
+avg / total       0.80      0.80      0.80    157390
+
+(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ python classing.py --since 2017-04-07 --until 2017-04-08 --querysearch "united airlines"[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1@9[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1P[1@1[1@0[1P[1@0[1P[1@0
+loading vectorizer
+loading vectorizer
+getting tweets...
+^[[D^[[D^[[D^[[D^[[D^[[D^[[D                            2017-04-09 19 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 12 - predicting 100 more tweets...
+Prediction Time: 0.003500s
+2017-04-09 07 - predicting 100 more tweets...
+Prediction Time: 0.004496s
+2017-04-08 23 - predicting 41 more tweets...
+Prediction Time: 0.002501s
+341
+OrderedDict([('2017-04-09 19', {'neg': 4, 'pos': 6}), ('2017-04-09 18', {'neg': 3, 'pos': 6}), ('2017-04-09 17', {'neg': 7, 'pos': 5}), ('2017-04-09 16', {'neg': 4, 'pos': 9}), ('2017-04-09 15', {'neg': 6, 'pos': 13}), ('2017-04-09 14', {'neg': 7, 'pos': 7}), ('2017-04-09 13', {'neg': 8, 'pos': 8}), ('2017-04-09 12', {'neg': 3, 'pos': 5}), ('2017-04-09 11', {'neg': 6, 'pos': 14}), ('2017-04-09 10', {'neg': 6, 'pos': 8}), ('2017-04-09 09', {'neg': 5, 'pos': 12}), ('2017-04-09 08', {'neg': 13, 'pos': 17}), ('2017-04-09 07', {'neg': 43, 'pos': 16}), ('2017-04-09 06', {'neg': 0, 'pos': 3}), ('2017-04-09 05', {'neg': 4, 'pos': 7}), ('2017-04-09 04', {'neg': 2, 'pos': 9}), ('2017-04-09 03', {'neg': 2, 'pos': 2}), ('2017-04-09 02', {'neg': 3, 'pos': 5}), ('2017-04-09 01', {'neg': 6, 'pos': 11}), ('2017-04-09 00', {'neg': 3, 'pos': 2}), ('2017-04-08 23', {'neg': 1, 'pos': 5}), ('2017-04-08 22', {'neg': 2, 'pos': 5}), ('2017-04-08 21', {'neg': 9, 'pos': 6}), ('2017-04-08 20', {'neg': 5, 'pos': 8})])
+157390 [0, 1, 0, 1, 0, 0, 0, 1, 0, 0]
+157390 [0 0 0 0 0 1 0 0 1 0]
+Results for LinearSVC()
+Training time: 0.018001s; Prediction time(Test): 0.010502s
+             precision    recall  f1-score   support
+
+          0       0.80      0.79      0.79     78255
+          1       0.79      0.81      0.80     79135
+
+avg / total       0.80      0.80      0.80    157390
+
+(venv) ]0;johnskan@DESKTOP-SVTCT79: ~/BuzzWordTrading/classingjohnskan@DESKTOP-SVTCT79:~/BuzzWordTrading/classing$ python classing.py --since 2017-04-09 --until 2017-04-10 --querysearch "united airlines"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"[1P"t"e"s"t"[1P"l"a"
+loading vectorizer
+loading vectorizer
+getting tweets...
+2017-04-09 19 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 19 - predicting 100 more tweets...
+Prediction Time: 0.004001s
+2017-04-09 19 - predicting 100 more tweets...
+Prediction Time: 0.005001s
+2017-04-09 18 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 18 - predicting 100 more tweets...
+Prediction Time: 0.005001s
+2017-04-09 17 - predicting 100 more tweets...
+Prediction Time: 0.005001s
+2017-04-09 17 - predicting 100 more tweets...
+Prediction Time: 0.008001s
+2017-04-09 17 - predicting 100 more tweets...
+Prediction Time: 0.005001s
+2017-04-09 16 - predicting 100 more tweets...
+Prediction Time: 0.008500s
+2017-04-09 16 - predicting 100 more tweets...
+Prediction Time: 0.006501s
+2017-04-09 15 - predicting 100 more tweets...
+Prediction Time: 0.008001s
+2017-04-09 15 - predicting 100 more tweets...
+Prediction Time: 0.004001s
+2017-04-09 15 - predicting 100 more tweets...
+Prediction Time: 0.005501s
+2017-04-09 14 - predicting 100 more tweets...
+Prediction Time: 0.008001s
+2017-04-09 14 - predicting 100 more tweets...
+Prediction Time: 0.004000s
+2017-04-09 13 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 13 - predicting 100 more tweets...
+Prediction Time: 0.004000s
+2017-04-09 13 - predicting 100 more tweets...
+Prediction Time: 0.008001s
+2017-04-09 12 - predicting 100 more tweets...
+Prediction Time: 0.004001s
+2017-04-09 12 - predicting 100 more tweets...
+Prediction Time: 0.005501s
+2017-04-09 12 - predicting 100 more tweets...
+Prediction Time: 0.006001s
+2017-04-09 11 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 11 - predicting 100 more tweets...
+Prediction Time: 0.006001s
+2017-04-09 11 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 10 - predicting 100 more tweets...
+Prediction Time: 0.006001s
+2017-04-09 10 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 10 - predicting 100 more tweets...
+Prediction Time: 0.008501s
+2017-04-09 09 - predicting 100 more tweets...
+Prediction Time: 0.004001s
+2017-04-09 09 - predicting 100 more tweets...
+Prediction Time: 0.006501s
+2017-04-09 09 - predicting 100 more tweets...
+Prediction Time: 0.004001s
+2017-04-09 08 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 08 - predicting 100 more tweets...
+Prediction Time: 0.008001s
+2017-04-09 07 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 07 - predicting 100 more tweets...
+Prediction Time: 0.005500s
+2017-04-09 06 - predicting 100 more tweets...
+Prediction Time: 0.003502s
+2017-04-09 06 - predicting 100 more tweets...
+Prediction Time: 0.004500s
+2017-04-09 05 - predicting 100 more tweets...
+Prediction Time: 0.010002s
+2017-04-09 05 - predicting 100 more tweets...
+Prediction Time: 0.006001s
+2017-04-09 04 - predicting 100 more tweets...
+Prediction Time: 0.009502s
+2017-04-09 04 - predicting 100 more tweets...
+Prediction Time: 0.004999s
+2017-04-09 03 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 03 - predicting 100 more tweets...
+Prediction Time: 0.005501s
+2017-04-09 02 - predicting 100 more tweets...
+Prediction Time: 0.005506s
+2017-04-09 02 - predicting 100 more tweets...
+Prediction Time: 0.004500s
+2017-04-09 01 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-09 00 - predicting 100 more tweets...
+Prediction Time: 0.007501s
+2017-04-08 23 - predicting 100 more tweets...
+Prediction Time: 0.005000s
+2017-04-08 23 - predicting 100 more tweets...
+Prediction Time: 0.004501s
+2017-04-08 22 - predicting 100 more tweets...
+Prediction Time: 0.005001s
+2017-04-08 22 - predicting 100 more tweets...
+Prediction Time: 0.004500s
+2017-04-08 21 - predicting 100 more tweets...
+Prediction Time: 0.006501s
+2017-04-08 21 - predicting 100 more tweets...
+Prediction Time: 0.005501s
+2017-04-08 20 - predicting 100 more tweets...
+Prediction Time: 0.004001s
+2017-04-08 20 - predicting 99 more tweets...
+Prediction Time: 0.005009s
+5399
+OrderedDict([('2017-04-09 19', {'neg': 12, 'pos': 195}), ('2017-04-09 18', {'neg': 24, 'pos': 210}), ('2017-04-09 17', {'neg': 25, 'pos': 253}), ('2017-04-09 16', {'neg': 27, 'pos': 203}), ('2017-04-09 15', {'neg': 23, 'pos': 264}), ('2017-04-09 14', {'neg': 26, 'pos': 201}), ('2017-04-09 13', {'neg': 26, 'pos': 245}), ('2017-04-09 12', {'neg': 24, 'pos': 303}), ('2017-04-09 11', {'neg': 15, 'pos': 281}), ('2017-04-09 10', {'neg': 32, 'pos': 249}), ('2017-04-09 09', {'neg': 21, 'pos': 242}), ('2017-04-09 08', {'neg': 13, 'pos': 193}), ('2017-04-09 07', {'neg': 15, 'pos': 217}), ('2017-04-09 06', {'neg': 13, 'pos': 177}), ('2017-04-09 05', {'neg': 15, 'pos': 225}), ('2017-04-09 04', {'neg': 26, 'pos': 182}), ('2017-04-09 03', {'neg': 13, 'pos': 153}), ('2017-04-09 02', {'neg': 17, 'pos': 149}), ('2017-04-09 01', {'neg': 5, 'pos': 124}), ('2017-04-09 00', {'neg': 12, 'pos': 130}), ('2017-04-08 23', {'neg': 23, 'pos': 144}), ('2017-04-08 22', {'neg': 15, 'pos': 223}), ('2017-04-08 21', {'neg': 24, 'pos': 165}), ('2017-04-08 20', {'neg': 32, 'pos': 193})])
+157390 [0, 1, 0, 1, 0, 0, 0, 1, 0, 0]
+157390 [0 0 0 0 0 1 0 0 1 0]
+Results for LinearSVC()
+Training time: 0.020502s; Prediction time(Test): 0.010501s

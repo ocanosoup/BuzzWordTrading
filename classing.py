@@ -18,21 +18,25 @@ from sklearn.metrics import classification_report
 import numpy as np
 import matplotlib.pyplot as plt
 
+import random
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description='Get tweet sentiment for a query over a period of time')
 
     parser.add_argument('--since', dest='since', type=str, required=True)
     parser.add_argument('--until', dest='until', type=str, required=True)
-    parser.add_argument('--querysearch', dest='querysearch', type=str, required=True)
+    parser.add_argument('--user', dest='user', type=str, default=None)
+    parser.add_argument('--query', dest='query', type=str, default=None)
 
     args = parser.parse_args()
 
     filename='output/output'
     for arg in args.__dict__:
-        filename += '_' + args.__dict__[arg].replace(' ','')
-
-    filename+='.csv'
+        try:
+            filename += '_' + args.__dict__[arg].replace(' ','')
+        except:
+            print "missing " + arg
 
     # Create feature vectors
     vectorizer = None
@@ -65,9 +69,9 @@ if __name__ == '__main__':
             for line in csvreader:
                 if len(line) == 0:
                     continue
-                print i
+                if i%100000==0:
+                    print i
                 i+=1
-                import random
                 line[0] = unicode(line[0], errors='replace')
                 if random.randint(1,10) == 1:
                     test_data.append(line[3])
@@ -149,52 +153,70 @@ if __name__ == '__main__':
     hist = OrderedDict()
 
     print "getting tweets..."
-    with open(filename, 'w') as csvfile:
+    counter = 0
 
-        counter = 0
-        fieldnames = ['neg', 'pos']
+    tweetCriteria = got.manager.TweetCriteria().setMaxTweets(100000000)
+
+    if args.user is not None:
+        tweetCriteria.username = args.user
+    if args.query is not None:
+        tweetCriteria.querySearch = args.query
+    if args.until is not None:
+        tweetCriteria.until = args.until
+    if args.since is not None:
+        tweetCriteria.since = args.since
+
+
+    def receiveBuffer(tweets):
+        import time
+        time.sleep(15)
+        global counter
+        counter += len(tweets)
+        unknown_data = []
+        unknown_dates = []
+        for t in tweets:
+            try:
+                date = t.date.strftime("%Y-%m-%d %H")
+                unknown_data.append(t.text.encode("ascii", "ignore"))
+                unknown_dates.append(date)
+                if not date in hist: hist[date] =  {'pos':0,'neg':0}
+
+            except UnicodeEncodeError as e:
+                print e
+
+        print('%s - predicting %d more tweets...' % (unknown_dates[0], len(tweets)))
+        ts = time.time()
+        unknown_vectors = vectorizer.transform(unknown_data)
+        unknown_liblinear = classifier_liblinear.predict(unknown_vectors)
+        te = time.time()
+        ptime = te - ts
+        print 'Prediction Time: %fs' % ptime
+
+        for i, sentiment in enumerate(unknown_liblinear):
+            #data = {}
+            if sentiment == 0:
+                hist[unknown_dates[i]]['neg'] += 1
+                #data['neg'] = unknown_dates[i]
+            else:
+                hist[unknown_dates[i]]['pos'] += 1
+                #data['pos'] = unknown_dates[i]
+
+            #writer.writerow(data)
+
+    got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
+    print "{} tweets in total".format(counter)
+
+    with open(filename+'.csv', 'w') as csvfile:
+
+        fieldnames = ['date','pos','neg']
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
-
-        tweetCriteria = got.manager.TweetCriteria().setMaxTweets(100000000)
-
-        tweetCriteria.querySearch = args.querysearch
-        tweetCriteria.since = args.since
-        tweetCriteria.until = args.until
-        tweetCriteria.until = args.until
-
-        def receiveBuffer(tweets):
-            global counter
-            counter += len(tweets)
-            unknown_data = []
-            unknown_dates = []
-            for t in tweets:
-                try:
-                    date = t.date.strftime("%Y-%m-%d %H")
-                    unknown_data.append(t.text.encode("ascii", "ignore"))
-                    unknown_dates.append(date)
-                    if not date in hist: hist[date] =  {'pos':0,'neg':0}
-
-                except UnicodeEncodeError as e:
-                    print e
-
-            print('%s - predicting %d more tweets...' % (unknown_dates[0], len(tweets)))
-            unknown_vectors = vectorizer.transform(unknown_data)
-            unknown_liblinear = classifier_liblinear.predict(unknown_vectors)
-
-            for i, sentiment in enumerate(unknown_liblinear):
-                #data = {}
-                if sentiment == 0:
-                    hist[unknown_dates[i]]['neg'] += 1
-                    #data['neg'] = unknown_dates[i]
-                else:
-                    hist[unknown_dates[i]]['pos'] += 1
-                    #data['pos'] = unknown_dates[i]
-
-                #writer.writerow(data)
-
-        got.manager.TweetManager.getTweets(tweetCriteria, receiveBuffer)
-        print counter
+        for item in hist:
+            line = {}
+            line['date'] = item
+            line['pos'] = hist[item]['pos']
+            line['neg'] = hist[item]['neg']
+            writer.writerow(line)
 
 
     ''' ********************* Plot Twitter Data **********************
@@ -203,8 +225,6 @@ if __name__ == '__main__':
         difference in a gains/loss format. and potentially also plot
         the stockmarket data
         ************************************************************** '''
-
-    print hist
 
     dates = []
     neg = []
@@ -237,12 +257,12 @@ if __name__ == '__main__':
 
     plt.xlabel('Datetime (Year-Month-Day hour)')
     plt.ylabel('Number of Tweets')
-    plt.title('Histogram of Positive and Negative (Above and Below) Tweets Matching the Query "{}"'.format(args.querysearch))
+    plt.title('Histogram of Positive and Negative (Above and Below) Tweets Matching the Query "{}"'.format(args.query))
     plt.xticks(index + bar_width / 2, dates, rotation='vertical')
     plt.legend()
 
     plt.tight_layout()
-    plt.show()
+    plt.savefig(filename+'_1.png', bbox_inches='tight')
 
 
     # New plot
@@ -260,12 +280,12 @@ if __name__ == '__main__':
 
     plt.xlabel('Datetime (Year-Month-Day hour)')
     plt.ylabel('Difference (Positives - Negatives)')
-    plt.title('Histogram of the Difference of Sentiments in Tweets Matching the Query "{}"'.format(args.querysearch))
+    plt.title('Histogram of the Difference of Sentiments in Tweets Matching the Query "{}"'.format(args.query))
     plt.xticks(index + bar_width / 2, dates, rotation='vertical')
     plt.legend()
 
     plt.tight_layout()
-    plt.show()
+    plt.savefig(filename+'_2.png', bbox_inches='tight')
 
     #new plot
     fig, ax = plt.subplots()
@@ -288,12 +308,12 @@ if __name__ == '__main__':
 
     plt.xlabel('Datetime (Year-Month-Day hour)')
     plt.ylabel('Number of Tweets')
-    plt.title('Histogram of Positive and Negative (Side-by-Side) Tweets Matching the Query "{}"'.format(args.querysearch))
+    plt.title('Histogram of Positive and Negative (Side-by-Side) Tweets Matching the Query "{}"'.format(args.query))
     plt.xticks(index + bar_width / 2, dates, rotation='vertical')
     plt.legend()
 
     plt.tight_layout()
-    plt.show()
+    plt.savefig(filename+'_3.png', bbox_inches='tight')
 
     '''
     print "vectorizing input tweets..."
